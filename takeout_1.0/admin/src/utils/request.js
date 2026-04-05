@@ -7,7 +7,7 @@ moment.locale('zh-cn')
 
 // 统一配置
 let REQUEST = axios.create({
-  baseURL: 'http://localhost:8080/takeout/',
+  baseURL: 'http://1.92.113.25:8080/takeout/',
   responseType: 'json',
   validateStatus (status) {
     // 200 外的状态码都认定为失败
@@ -17,7 +17,7 @@ let REQUEST = axios.create({
 
 /////////////////
 let SYS_REQUEST = axios.create({
-  baseURL: 'http://localhost:8080/takeout/',
+  baseURL: 'http://1.92.113.25:8080/takeout/',
   responseType: 'json',
   validateStatus (status) {
     // 200 外的状态码都认定为失败
