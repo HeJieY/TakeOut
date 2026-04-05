@@ -1,0 +1,26 @@
+# 测试环境配置
+server:
+  port: 8080
+  servlet:
+    context-path: /takeout
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/takeout?&serverTimezone=Asia/Shanghai
+    username: root
+    password: 2145381080
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+  cache:
+    type: none
+
+websocket:
+  enabled: false
