@@ -36,7 +36,7 @@ public class SignInController {
         }
         Consumer consumer = new Consumer();
         consumer.setUsername(name);
-        consumer.setPassword(MD5Util.encrypt(name, password));
+        consumer.setPassword(password);
         consumer.setTelephone(telephone);
         consumer.setBalance(0.0);
 
@@ -68,7 +68,7 @@ public class SignInController {
         shop.setManagerName(managerName);
         shop.setTelephone(telephone);
         shop.setAddress(address);
-        shop.setPassword(MD5Util.encrypt(name, password));
+        shop.setPassword(password);
 
         int res = shopService.add(shop);
         if (res == 0) {

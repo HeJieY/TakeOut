@@ -93,12 +93,12 @@ public class ConsumerController {
                                        @RequestParam("oldPassword") String oldPassword,
                                        @RequestParam("newPassword") String newPassword) throws Exception {
         Consumer consumer = this.consumerService.queryConsumerById(CID);
-        if (consumer.getPassword().equals(MD5Util.encrypt(consumer.getUsername(), oldPassword))) {
-            consumer.setPassword(MD5Util.encrypt(consumer.getUsername(), newPassword));
+        if (consumer.getPassword().equals(oldPassword)) {
+            consumer.setPassword(newPassword);
             if (consumerService.update(consumer) != 0) {
                 return new ResponseBean().code(200)
                         .message("修改密码成功")
-                        .data(JWTUtils.consumerSign(consumer, MD5Util.encrypt(consumer.getUsername(), newPassword)))
+                        .data(JWTUtils.consumerSign(consumer, newPassword))
                         .put("info", consumer);
             } else {
                 throw new UnauthorizedException("修改密码失败，请联系管理员");
@@ -165,7 +165,7 @@ public class ConsumerController {
     @ResponseBody
     public boolean changePasswordByPhoneCode(String telephone, String password) {
         Consumer consumer = this.consumerService.queryConsumerByPhone(telephone);
-        consumer.setPassword(MD5Util.encrypt(consumer.getUsername(), password));
+        consumer.setPassword(password);
         int res = this.consumerService.update(consumer);
         return res != 0;
     }

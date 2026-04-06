@@ -52,8 +52,6 @@ public class LoginController {
             throw new UnauthorizedException("没有此用户");
         }
 
-        password = MD5Util.encrypt(username, password);
-
         if (userBean.getPassword().equals(password)) {
             ResponseBean responseBean = new ResponseBean();
             responseBean = responseBean.message("Login success").data(JWTUtils.consumerSign(userBean, password));
@@ -110,8 +108,6 @@ public class LoginController {
                               @RequestParam("password") String password) throws Exception {
         Shop userBean = shopService.queryShopByName(username);
 
-        password = MD5Util.encrypt(username, password);
-
         if (userBean == null) {
             throw new UnauthorizedException("没有此用户");
         }
@@ -137,8 +133,6 @@ public class LoginController {
             @RequestParam("password") String password
     ) throws Exception {
         Admin userBean = adminService.queryAdminByName(username);
-
-        password = MD5Util.encrypt(username, password);
 
         if (userBean == null) {
             throw new UnauthorizedException("没有此管理员");

@@ -204,12 +204,12 @@ public class AdminController {
                                        @RequestParam("oldPassword") String oldPassword,
                                        @RequestParam("newPassword") String newPassword) throws Exception {
         Admin admin = this.adminService.queryAdminById(AID);
-        if (admin.getPassword().equals(MD5Util.encrypt(admin.getUsername(), oldPassword))) {
-            admin.setPassword(MD5Util.encrypt(admin.getUsername(), newPassword));
+        if (admin.getPassword().equals(oldPassword)) {
+            admin.setPassword(newPassword);
             if (adminService.update(admin) != 0) {
                 return new ResponseBean().code(200)
                         .message("修改密码成功")
-                        .data(JWTUtils.adminSign(admin, MD5Util.encrypt(admin.getUsername(), newPassword)))
+                        .data(JWTUtils.adminSign(admin, newPassword))
                         .put("info", admin);
             } else {
                 throw new UnauthorizedException("修改密码失败，请联系管理员");
